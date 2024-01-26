@@ -1,0 +1,20 @@
+(defmacro set-block-number [obj]
+    (import pyfiglet)
+    (import requests)
+    (import json)
+
+    ;; Request current block number
+    (setv url "https://eth.llamarpc.com")
+    (setv payload {"method" "eth_blockNumber"})
+    (setv request (requests.post url payload))
+    (setv response (request.json))
+    (setv latest_block_number (str (int(get response "result") 16)))
+
+    ;; ASCII Art
+    (setv ascii_art (str(pyfiglet.figlet_format latest_block_number)))
+    `(setv ~obj ~ascii_art))
+
+(defvar blockNumber (public (string 1000)))
+
+(defn __init__ [] :external
+    (set-block-number self/blockNumber))
