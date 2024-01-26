@@ -1,7 +1,6 @@
 (defmacro set-block-number [obj]
     (import pyfiglet)
     (import requests)
-    (import json)
 
     ;; Request current block number
     (setv url "https://eth.llamarpc.com")
